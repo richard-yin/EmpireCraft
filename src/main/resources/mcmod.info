@@ -1,0 +1,16 @@
+[
+{
+  "modid": "empirecraft",
+  "name": "EmpireCraft",
+  "description": "insert description here",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["BovineColonel"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
