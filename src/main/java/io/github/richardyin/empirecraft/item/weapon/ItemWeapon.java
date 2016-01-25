@@ -10,7 +10,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemWeapon extends ItemTool {
+public abstract class ItemWeapon extends ItemTool {
 
 	protected ItemWeapon(float damageMod, ToolMaterial material,
 			Set effectiveBlocks) {

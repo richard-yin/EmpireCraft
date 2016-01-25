@@ -16,4 +16,8 @@ public class EmpireCraftMobs {
 	public static void initializeMobs() {
 		
 	}
+	
+	public static void addMob(Class<? extends EntityLiving> mobClass, String name) {
+		
+	}
 }
