@@ -1,4 +1,4 @@
-package io.github.richardyin.empirecraft.item;
+package io.github.richardyin.empirecraft.common.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

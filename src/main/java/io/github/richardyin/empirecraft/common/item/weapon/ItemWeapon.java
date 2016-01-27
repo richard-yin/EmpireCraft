@@ -1,4 +1,4 @@
-package io.github.richardyin.empirecraft.item.weapon;
+package io.github.richardyin.empirecraft.common.item.weapon;
 
 import java.util.HashSet;
 import java.util.Set;

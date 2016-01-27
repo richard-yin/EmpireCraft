@@ -1,5 +1,6 @@
 package io.github.richardyin.empirecraft;
 
+import io.github.richardyin.empirecraft.common.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;

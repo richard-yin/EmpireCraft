@@ -1,7 +1,8 @@
-package io.github.richardyin.empirecraft.item;
+package io.github.richardyin.empirecraft.common.item;
 
 import io.github.richardyin.empirecraft.EmpireCraft;
-import io.github.richardyin.empirecraft.item.weapon.ItemSpear;
+import io.github.richardyin.empirecraft.client.item.ItemRenders;
+import io.github.richardyin.empirecraft.common.item.weapon.ItemSpear;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EmpireCraftItems {
-	private static Map<Item, String> names = new HashMap<>();
+	private static Map<Item, String> names = new HashMap<Item, String>();
 	private static boolean client = false;
 	
 	private static ItemTab itemTab;
@@ -37,16 +38,8 @@ public class EmpireCraftItems {
 		GameRegistry.registerItem(item, name);
 		item.setUnlocalizedName(EmpireCraft.MODID + "_" + name);
 		item.setCreativeTab(itemTab);
-		if(client) addItemRender(item, name);
+		if(client) ItemRenders.registerItem(item, name);
 		return item;
-	}
-	
-	@SideOnly(Side.CLIENT)
-	private static void addItemRender(Item item, String name) {
-		ModelResourceLocation itemModelResourceLocation =
-				new ModelResourceLocation("empirecraft:" + name, "inventory");
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0,
-				itemModelResourceLocation);
 	}
 	
 	public static String getName(Item item) {
