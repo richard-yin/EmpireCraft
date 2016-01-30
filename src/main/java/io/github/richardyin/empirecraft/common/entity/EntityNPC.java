@@ -1,6 +1,6 @@
 package io.github.richardyin.empirecraft.common.entity;
 
-import io.github.richardyin.empirecraft.npc.faction.Faction;
+import io.github.richardyin.empirecraft.common.entity.faction.Faction;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.world.World;
 

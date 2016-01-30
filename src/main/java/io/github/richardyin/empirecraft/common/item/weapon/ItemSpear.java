@@ -1,13 +1,12 @@
 package io.github.richardyin.empirecraft.common.item.weapon;
 
-import java.util.HashSet;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemTool;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSpear extends ItemWeapon {
-	private ToolMaterial material;
 	
 	public ItemSpear(ToolMaterial material) {
 		super(1, material);

@@ -1,4 +1,4 @@
-package io.github.richardyin.empirecraft.npc.faction;
+package io.github.richardyin.empirecraft.common.entity.faction;
 
 public class PlayerFaction extends Faction {
 	private String uuid;

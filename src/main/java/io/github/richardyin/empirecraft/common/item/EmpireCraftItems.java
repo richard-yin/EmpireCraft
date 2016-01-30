@@ -2,6 +2,7 @@ package io.github.richardyin.empirecraft.common.item;
 
 import io.github.richardyin.empirecraft.EmpireCraft;
 import io.github.richardyin.empirecraft.client.item.ItemRenders;
+import io.github.richardyin.empirecraft.common.item.weapon.ItemJavelin;
 import io.github.richardyin.empirecraft.common.item.weapon.ItemSpear;
 
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class EmpireCraftItems {
 	private static ItemTab itemTab;
 	
 	public static Item IRON_SPEAR;
+	public static Item IRON_JAVELIN;
 	
 	public static void setClientSide(boolean clientSide) {
 		client = clientSide;
@@ -31,6 +33,7 @@ public class EmpireCraftItems {
 	public static void initializeItems() {
 		itemTab = new ItemTab(CreativeTabs.getNextID(), "EmpireCraftTab");
 		IRON_SPEAR = addItem(new ItemSpear(ToolMaterial.IRON), "ironSpear");
+		IRON_JAVELIN = addItem(new ItemJavelin(ToolMaterial.IRON), "ironJavelin");
 	}
 	
 	public static Item addItem(Item item, String name) {

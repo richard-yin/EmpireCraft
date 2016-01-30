@@ -1,4 +1,4 @@
-package io.github.richardyin.empirecraft.npc.faction;
+package io.github.richardyin.empirecraft.common.entity.faction;
 
 import java.util.Collections;
 import java.util.HashSet;

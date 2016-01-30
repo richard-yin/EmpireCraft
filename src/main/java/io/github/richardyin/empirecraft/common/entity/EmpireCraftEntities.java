@@ -19,6 +19,6 @@ public class EmpireCraftEntities {
 	public static void addEntity(Class<? extends Entity> entityClass, String name) {
 		EntityRegistry.registerModEntity(entityClass, name,
 				EntityRegistry.findGlobalUniqueEntityId(), EmpireCraft.instance,
-				512, 1, true, 0x999999, 0xcccccc);
+				512, 1, true, 0x333333, 0xcccccc);
 	}
 }
