@@ -1,4 +1,4 @@
-package io.github.richardyin.empirecraft.common.entity.faction;
+package io.github.richardyin.empirecraft.common.entity.ai;
 
 import java.util.Collections;
 import java.util.HashSet;

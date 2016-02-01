@@ -11,6 +11,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class ItemWeapon extends ItemTool {
+	private double reach = 0;
 
 	protected ItemWeapon(float damageMod, ToolMaterial material,
 			Set effectiveBlocks) {
@@ -19,6 +20,21 @@ public abstract class ItemWeapon extends ItemTool {
 
 	protected ItemWeapon(float damageMod, ToolMaterial material) {
 		super(material.getDamageVsEntity() + damageMod, material, new HashSet<Block>());
+	}
+	
+	protected ItemWeapon(float damageMod, double reach, ToolMaterial material,
+			Set effectiveBlocks) {
+		super(material.getDamageVsEntity() + damageMod, material, effectiveBlocks);
+		this.reach = reach;
+	}
+
+	protected ItemWeapon(float damageMod, double reach, ToolMaterial material) {
+		super(material.getDamageVsEntity() + damageMod, material, new HashSet<Block>());
+		this.reach = reach;
+	}
+	
+	public double getReach() {
+		return reach;
 	}
 	
 	@Override

@@ -7,9 +7,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSpear extends ItemWeapon {
-	
 	public ItemSpear(ToolMaterial material) {
-		super(1, material);
+		super(1, 3, material);
 		setMaxDamage(material.getMaxUses() / 2);
 	}
 }

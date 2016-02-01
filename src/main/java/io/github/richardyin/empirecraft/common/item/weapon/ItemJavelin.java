@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class ItemJavelin extends ItemWeapon {
 
 	public ItemJavelin(ToolMaterial material) {
-		super(-1, material);
+		super(-1, 2, material);
 		setMaxDamage(material.getMaxUses() / 2);
 	}
 	
