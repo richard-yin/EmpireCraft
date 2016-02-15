@@ -21,7 +21,6 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		
+		EmpireCraftEntities.addSpawns();
 	}
-
 }

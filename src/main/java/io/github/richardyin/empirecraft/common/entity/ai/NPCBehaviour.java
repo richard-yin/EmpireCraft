@@ -21,7 +21,7 @@ public class NPCBehaviour {
 	public static Class[] HOSTILE_MOBS =
 		{EntityMob.class, EntitySlime.class, EntityGhast.class, EntityDragon.class};
 	
-	public NPCBehaviour(EntityCreature entity) {
+	public <T extends EntityCreature & IFactionEntity> NPCBehaviour(T entity) {
 		tasks.add(new EntityAISwimming(entity));
 		tasks.add(new EntityAIRestrictOpenDoor(entity));
 		tasks.add(new EntityAIOpenDoor(entity, true));

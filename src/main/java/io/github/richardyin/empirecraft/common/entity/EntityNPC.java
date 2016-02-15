@@ -1,37 +1,36 @@
 package io.github.richardyin.empirecraft.common.entity;
 
 import io.github.richardyin.empirecraft.common.entity.ai.Faction;
+import io.github.richardyin.empirecraft.common.entity.ai.IFactionEntity;
 import io.github.richardyin.empirecraft.common.entity.ai.NPCBehaviour;
-import io.github.richardyin.empirecraft.common.entity.ai.NPCBehaviourMelee;
-import io.github.richardyin.empirecraft.common.entity.ai.tasks.EntityNPCMeleeAttack;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
-import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityNPC extends EntityCreature {
-	private Faction faction;
+public class EntityNPC extends EntityCreature implements IFactionEntity {
+	private Faction faction = Faction.BANDITS;
 	private PathNavigateGround navigator;
 	private NPCBehaviour behaviour;
+	private EntityLivingBase leader;
+	private List<EntityNPC> followers = new ArrayList<EntityNPC>();
+
 	public EntityNPC(World worldIn) {
 		super(worldIn);
 		navigator = (PathNavigateGround) getNavigator();
 		navigator.setCanSwim(true);
 		navigator.setAvoidsWater(true);
-		setBehaviour(new NPCBehaviourMelee(this));
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32);
 	}
 	
 	public void setBehaviour(NPCBehaviour behaviour) {
@@ -87,9 +86,34 @@ public class EntityNPC extends EntityCreature {
 
 		return success;
 	}
-	
+		
 	@Override
 	public boolean canPickUpLoot() {
 		return true;
+	}
+	
+	@Override
+	public Faction getFaction() {
+		return faction;
+	}
+
+	public void setFaction(Faction faction) {
+		this.faction = faction;
+	}
+	
+	public List<EntityNPC> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<EntityNPC> followers) {
+		this.followers = followers;
+	}
+
+	public EntityLivingBase getLeader() {
+		return leader;
+	}
+
+	public void setLeader(EntityLivingBase leader) {
+		this.leader = leader;
 	}
 }

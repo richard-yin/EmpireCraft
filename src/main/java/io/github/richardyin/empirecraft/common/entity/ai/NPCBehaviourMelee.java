@@ -10,19 +10,13 @@ import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 
-public class NPCBehaviourMelee extends NPCBehaviour {
+public class NPCBehaviourMelee extends NPCBehaviourSoldier {
 
-	public NPCBehaviourMelee(EntityCreature entity) {
+	public <T extends EntityCreature & IFactionEntity> NPCBehaviourMelee(T entity) {
 		super(entity);
 		for(int i = 0; i < NPCBehaviour.HOSTILE_MOBS.length; i++) {
 			tasks.add(new EntityNPCMeleeAttack(
 					entity, NPCBehaviour.HOSTILE_MOBS[i], 0.4f, false));
-		}
-		
-		targetTasks.add(new EntityAIHurtByTarget(entity, true, NPCBehaviour.HOSTILE_MOBS));
-		for(int i = 0; i < NPCBehaviour.HOSTILE_MOBS.length; i++) {
-			targetTasks.add(new EntityAINearestAttackableTarget<EntityLivingBase>(
-					entity, NPCBehaviour.HOSTILE_MOBS[i], true, true));
 		}
 	}
 }
