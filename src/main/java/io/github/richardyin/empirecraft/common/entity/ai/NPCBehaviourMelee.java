@@ -14,9 +14,7 @@ public class NPCBehaviourMelee extends NPCBehaviourSoldier {
 
 	public <T extends EntityCreature & IFactionEntity> NPCBehaviourMelee(T entity) {
 		super(entity);
-		for(int i = 0; i < NPCBehaviour.HOSTILE_MOBS.length; i++) {
-			tasks.add(new EntityNPCMeleeAttack(
-					entity, NPCBehaviour.HOSTILE_MOBS[i], 0.4f, false));
-		}
+		tasks.add(new EntityNPCMeleeAttack(
+				entity, EntityLivingBase.class, 0.4f, false));
 	}
 }

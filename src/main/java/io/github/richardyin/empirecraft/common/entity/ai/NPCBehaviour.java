@@ -18,9 +18,6 @@ public class NPCBehaviour {
 	protected List<EntityAIBase> tasks = new ArrayList<EntityAIBase>();
 	protected List<EntityAIBase> targetTasks = new ArrayList<EntityAIBase>();
 	
-	public static Class[] HOSTILE_MOBS =
-		{EntityMob.class, EntitySlime.class, EntityGhast.class, EntityDragon.class};
-	
 	public <T extends EntityCreature & IFactionEntity> NPCBehaviour(T entity) {
 		tasks.add(new EntityAISwimming(entity));
 		tasks.add(new EntityAIRestrictOpenDoor(entity));

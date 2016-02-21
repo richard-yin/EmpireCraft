@@ -14,14 +14,19 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityEventHandler {
 	@SubscribeEvent
-	public void onMobSpawn(LivingSpawnEvent event) {
+	public void onMobSpawn(LivingSpawnEvent.CheckSpawn event) {
+		if(!event.world.canBlockSeeSky(new BlockPos(event.entity))) {
+			event.setResult(Result.DENY);
+			return;
+		}
 		if(event.entityLiving instanceof EntityNPC) {
-			EmpireCraft.logger.debug("Spawning bandits");
 			//bandit leader
 			EntityNPC npc = (EntityNPC) event.entityLiving;
 			npc.setFaction(Faction.BANDITS);
@@ -30,22 +35,23 @@ public class EntityEventHandler {
 				npc.setCurrentItemOrArmor(i, getBlackArmor(i));
 			}
 			NPCBehaviour leaderBehaviour = new NPCBehaviourMelee(npc);
-			leaderBehaviour.getTasks().add(new EntityAIWander(npc, 1.0f));
+			leaderBehaviour.getTasks().add(new EntityAIWander(npc, 0.7f));
 			npc.setBehaviour(leaderBehaviour);
 			
 			//bandit followers
 			for(int i = 0; i < 3; i++) {
 				EntityNPC follower = new EntityNPC(event.world);
+				follower.setPosition(event.x, event.y, event.z);
 				follower.setCurrentItemOrArmor(1, getBlackArmor(1));
 				follower.setCurrentItemOrArmor(3, getBlackArmor(3));
 				follower.setCurrentItemOrArmor(0, new ItemStack(EmpireCraftItems.IRON_DAGGER));
+				follower.setFaction(Faction.BANDITS);
 				follower.setLeader(npc);
 				npc.getFollowers().add(follower);
 				
-				NPCBehaviour followerBehaviour = new NPCBehaviourMelee(npc);
-				followerBehaviour.getTasks().add(new EntityNPCFollowLeader(follower, 1, 1, 2));
+				NPCBehaviour followerBehaviour = new NPCBehaviourMelee(follower);
+				followerBehaviour.getTasks().add(new EntityNPCFollowLeader(follower, 0.7, 2, 5));
 				npc.setBehaviour(followerBehaviour);
-				event.world.spawnEntityInWorld(follower);
 			}
 		}
 	}

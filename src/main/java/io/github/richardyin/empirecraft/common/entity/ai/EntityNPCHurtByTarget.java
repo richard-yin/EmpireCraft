@@ -1,10 +1,9 @@
-package net.minecraft.entity.ai;
+package io.github.richardyin.empirecraft.common.entity.ai;
 
-import io.github.richardyin.empirecraft.common.entity.ai.Faction;
-import io.github.richardyin.empirecraft.common.entity.ai.IFactionEntity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 
 public class EntityNPCHurtByTarget extends EntityAIHurtByTarget {
 	private Faction faction;

@@ -1,11 +1,10 @@
-package net.minecraft.entity.ai;
+package io.github.richardyin.empirecraft.common.entity.ai;
 
 import com.google.common.base.Predicate;
 
-import io.github.richardyin.empirecraft.common.entity.ai.Faction;
-import io.github.richardyin.empirecraft.common.entity.ai.IFactionEntity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 
 public class EntityNPCNearestAttackableTarget extends
 		EntityAINearestAttackableTarget<EntityLivingBase> {
