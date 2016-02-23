@@ -23,7 +23,6 @@ public class EntityNPC extends EntityCreature implements IFactionEntity {
 	private PathNavigateGround navigator;
 	private NPCBehaviour behaviour;
 	private EntityLivingBase leader;
-	private List<EntityNPC> followers = new ArrayList<EntityNPC>();
 
 	public EntityNPC(World worldIn) {
 		super(worldIn);
@@ -99,14 +98,6 @@ public class EntityNPC extends EntityCreature implements IFactionEntity {
 
 	public void setFaction(Faction faction) {
 		this.faction = faction;
-	}
-	
-	public List<EntityNPC> getFollowers() {
-		return followers;
-	}
-
-	public void setFollowers(List<EntityNPC> followers) {
-		this.followers = followers;
 	}
 
 	public EntityLivingBase getLeader() {

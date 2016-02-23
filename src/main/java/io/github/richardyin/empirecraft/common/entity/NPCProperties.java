@@ -1,5 +1,7 @@
 package io.github.richardyin.empirecraft.common.entity;
 
+import java.util.UUID;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -10,6 +12,7 @@ public class NPCProperties implements IExtendedEntityProperties {
 	public static final String name = "NPCProperties";
 	
 	private final EntityNPC npc;
+	private EntityNPC leader;
 
 	public NPCProperties(EntityNPC npc) {
 		this.npc = npc;
@@ -17,13 +20,16 @@ public class NPCProperties implements IExtendedEntityProperties {
 
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
-		// TODO Auto-generated method stub
-
+		NBTTagCompound properties = new NBTTagCompound();
+		properties.setLong("LeaderUUIDMost", leader.getUniqueID().getMostSignificantBits());
+		properties.setLong("LeaderUUIDLeast", leader.getUniqueID().getLeastSignificantBits());
+		compound.setTag(name, properties);
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
-		// TODO Auto-generated method stub
+		UUID id = new UUID(compound.getLong("LeaderUUIDMost"),
+				compound.getLong("LeaderUUIDLeast"));
 
 	}
 
@@ -32,5 +38,4 @@ public class NPCProperties implements IExtendedEntityProperties {
 		// TODO Auto-generated method stub
 
 	}
-
 }

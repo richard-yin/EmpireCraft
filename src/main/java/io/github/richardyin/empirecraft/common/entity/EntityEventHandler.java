@@ -22,11 +22,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EntityEventHandler {
 	@SubscribeEvent
 	public void onMobSpawn(LivingSpawnEvent.CheckSpawn event) {
-		if(!event.world.canBlockSeeSky(new BlockPos(event.entity))) {
-			event.setResult(Result.DENY);
-			return;
-		}
 		if(event.entityLiving instanceof EntityNPC) {
+			if(!event.world.canBlockSeeSky(new BlockPos(event.entity))) {
+				event.setResult(Result.DENY);
+				return;
+			}
+			
 			//bandit leader
 			EntityNPC npc = (EntityNPC) event.entityLiving;
 			npc.setFaction(Faction.BANDITS);
@@ -47,7 +48,6 @@ public class EntityEventHandler {
 				follower.setCurrentItemOrArmor(0, new ItemStack(EmpireCraftItems.IRON_DAGGER));
 				follower.setFaction(Faction.BANDITS);
 				follower.setLeader(npc);
-				npc.getFollowers().add(follower);
 				
 				NPCBehaviour followerBehaviour = new NPCBehaviourMelee(follower);
 				followerBehaviour.getTasks().add(new EntityNPCFollowLeader(follower, 0.7, 2, 5));
