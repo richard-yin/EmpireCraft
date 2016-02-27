@@ -75,7 +75,7 @@ public class EntityEventHandler {
 			if(npcToFillLeader != null) {
 				NPCProperties prop = (NPCProperties)
 						event.entity.getExtendedProperties(NPCProperties.NAME);
-				prop.setLeader(event.entity);
+				prop.setLeader((EntityNPC) event.entity);
 			}
 		}
 	}
