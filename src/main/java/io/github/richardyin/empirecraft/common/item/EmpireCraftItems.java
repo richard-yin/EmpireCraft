@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EmpireCraftItems {
-	private static Map<Item, String> names = new HashMap<Item, String>();
+	private static Map<Item, String> names = new HashMap<>();
 	private static boolean client = false;
 	
 	private static ItemTab itemTab;

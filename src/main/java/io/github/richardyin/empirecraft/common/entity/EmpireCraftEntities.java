@@ -43,7 +43,7 @@ public class EmpireCraftEntities {
 	}
 	
 	public static void addSpawns() {
-		List<BiomeGenBase> spawnableBiomes = new ArrayList<BiomeGenBase>();
+		List<BiomeGenBase> spawnableBiomes = new ArrayList<>();
 		for(BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
 			if(canBanditsSpawn(biome)) spawnableBiomes.add(biome);
 		}

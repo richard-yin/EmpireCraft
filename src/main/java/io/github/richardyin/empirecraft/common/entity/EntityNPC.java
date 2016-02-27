@@ -3,16 +3,13 @@ package io.github.richardyin.empirecraft.common.entity;
 import io.github.richardyin.empirecraft.common.entity.ai.Faction;
 import io.github.richardyin.empirecraft.common.entity.ai.IFactionEntity;
 import io.github.richardyin.empirecraft.common.entity.ai.NPCBehaviour;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.item.Item;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -53,7 +50,9 @@ public class EntityNPC extends EntityCreature implements IFactionEntity {
 	 */
 	@Override
 	public boolean attackEntityAsMob(Entity entityIn) {
-		float baseDamage = 1;
+		Item heldItem = getHeldItem().getItem();
+		
+		float baseDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
 		int knockback = 0;
 
 		if (entityIn instanceof EntityLivingBase)

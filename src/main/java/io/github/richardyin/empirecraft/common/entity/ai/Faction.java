@@ -24,8 +24,8 @@ public class Faction {
 	
 	public Faction(String name) {
 		this.name = name;
-		enemies = new HashSet<Faction>();
-		hostileMobs = new HashSet<Class<EntityLiving>>();
+		enemies = new HashSet<>();
+		hostileMobs = new HashSet<>();
 	}
 
 	public String getName() {

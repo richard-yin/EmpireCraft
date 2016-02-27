@@ -15,8 +15,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 
 public class NPCBehaviour {
-	protected List<EntityAIBase> tasks = new ArrayList<EntityAIBase>();
-	protected List<EntityAIBase> targetTasks = new ArrayList<EntityAIBase>();
+	protected List<EntityAIBase> tasks = new ArrayList<>();
+	protected List<EntityAIBase> targetTasks = new ArrayList<>();
 	
 	public <T extends EntityCreature & IFactionEntity> NPCBehaviour(T entity) {
 		tasks.add(new EntityAISwimming(entity));
