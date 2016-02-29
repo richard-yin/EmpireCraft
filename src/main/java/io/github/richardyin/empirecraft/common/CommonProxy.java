@@ -1,5 +1,6 @@
 package io.github.richardyin.empirecraft.common;
 
+import io.github.richardyin.empirecraft.common.block.EmpireCraftBlocks;
 import io.github.richardyin.empirecraft.common.entity.EmpireCraftEntities;
 import io.github.richardyin.empirecraft.common.item.EmpireCraftItems;
 import net.minecraftforge.common.config.Configuration;
@@ -17,6 +18,7 @@ public class CommonProxy {
 
 	public void init(FMLInitializationEvent event) {
 		EmpireCraftItems.initializeItems();
+		EmpireCraftBlocks.initializeBlocks();
 		EmpireCraftEntities.initializeEntities();
 	}
 

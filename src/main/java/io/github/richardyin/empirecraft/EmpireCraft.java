@@ -21,7 +21,7 @@ public class EmpireCraft {
 	public static EmpireCraft instance;
 	
 	@SidedProxy(modId=MODID, clientSide="io.github.richardyin.empirecraft.client.ClientProxy",
-			serverSide="io.github.richardyin.empirecraft.CommonProxy")
+			serverSide="io.github.richardyin.empirecraft.common.CommonProxy")
 	public static CommonProxy proxy;
 	
 	public static Logger logger;

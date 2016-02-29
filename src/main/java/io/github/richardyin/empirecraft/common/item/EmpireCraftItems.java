@@ -23,10 +23,15 @@ public class EmpireCraftItems {
 	private static boolean client = false;
 	
 	private static ItemTab itemTab;
-	
+
+	//Weapons/Tools
 	public static Item IRON_SPEAR;
 	public static Item IRON_JAVELIN;
 	public static Item IRON_DAGGER;
+	
+	//Other
+	public static Item FIRE_CLAY;
+	public static Item FIRE_BRICK;
 	
 	public static void setClientSide(boolean clientSide) {
 		client = clientSide;
@@ -37,6 +42,8 @@ public class EmpireCraftItems {
 		IRON_SPEAR = addItem(new ItemSpear(ToolMaterial.IRON), "ironSpear");
 		IRON_JAVELIN = addItem(new ItemJavelin(ToolMaterial.IRON), "ironJavelin");
 		IRON_DAGGER = addItem(new ItemDagger(ToolMaterial.IRON), "ironDagger");
+		FIRE_CLAY = addItem(new Item(), "fireClay");
+		FIRE_BRICK = addItem(new Item(), "fireBrick");
 	}
 	
 	public static Item addItem(Item item, String name) {
@@ -50,5 +57,9 @@ public class EmpireCraftItems {
 	
 	public static String getName(Item item) {
 		return names.get(item);
+	}
+	
+	public static ItemTab getItemTab() {
+		return itemTab;
 	}
 }

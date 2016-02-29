@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "empirecraft:blocks/fire_brick"
+	}
+}
