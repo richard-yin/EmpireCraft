@@ -2,6 +2,7 @@ package io.github.richardyin.empirecraft.common.item;
 
 import io.github.richardyin.empirecraft.EmpireCraft;
 import io.github.richardyin.empirecraft.client.item.ItemRenders;
+import io.github.richardyin.empirecraft.common.block.EmpireCraftBlocks;
 import io.github.richardyin.empirecraft.common.item.weapon.ItemDagger;
 import io.github.richardyin.empirecraft.common.item.weapon.ItemJavelin;
 import io.github.richardyin.empirecraft.common.item.weapon.ItemSpear;
@@ -12,8 +13,10 @@ import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,6 +47,27 @@ public class EmpireCraftItems {
 		IRON_DAGGER = addItem(new ItemDagger(ToolMaterial.IRON), "ironDagger");
 		FIRE_CLAY = addItem(new Item(), "fireClay");
 		FIRE_BRICK = addItem(new Item(), "fireBrick");
+	}
+	
+	public static void addRecipes() {
+		ItemStack fireClay = new ItemStack(FIRE_CLAY, 8);
+		ItemStack clay = new ItemStack(Items.clay_ball);
+		ItemStack blazePowder = new ItemStack(Items.blaze_powder);
+		
+		// fire clay
+		GameRegistry.addRecipe(fireClay,
+				"CCC",
+				"CBC",
+				"CCC", 'C', clay, 'B', blazePowder);
+
+		// fire brick
+		ItemStack fireBrick = new ItemStack(FIRE_BRICK);
+		fireClay = new ItemStack(FIRE_CLAY);
+		GameRegistry.addSmelting(fireClay, fireBrick, 0.1f);
+
+		// fire brick block
+		ItemStack fireBrickBlock = new ItemStack(EmpireCraftBlocks.FIRE_BRICK);
+		GameRegistry.addRecipe(fireBrickBlock, "BB", "BB", 'B', fireBrick);
 	}
 	
 	public static Item addItem(Item item, String name) {
