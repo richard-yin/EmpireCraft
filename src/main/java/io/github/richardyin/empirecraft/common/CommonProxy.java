@@ -12,8 +12,6 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-		config.load();
-		config.save();
 	}
 
 	public void init(FMLInitializationEvent event) {
