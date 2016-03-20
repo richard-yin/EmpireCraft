@@ -11,4 +11,9 @@ public class ItemSpear extends ItemWeapon {
 		super(1, 3, material);
 		setMaxDamage(material.getMaxUses() / 2);
 	}
+	
+	public ItemSpear(float damageMod, double reach, ToolMaterial material) {
+		super(1, 3, material);
+		setMaxDamage(material.getMaxUses() / 2);
+	}
 }

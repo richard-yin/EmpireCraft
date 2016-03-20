@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 
-public class NPCBehaviourSoldier extends NPCBehaviour {
+public abstract class NPCBehaviourSoldier extends NPCBehaviour {
 
 	public <T extends EntityCreature & IFactionEntity> NPCBehaviourSoldier(
 			T entity) {
