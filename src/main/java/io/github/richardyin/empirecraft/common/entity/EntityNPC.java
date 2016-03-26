@@ -12,7 +12,8 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.item.Item;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityNPC extends EntityCreature implements IFactionEntity {
@@ -25,8 +26,7 @@ public class EntityNPC extends EntityCreature implements IFactionEntity {
 		super(worldIn);
 		navigator = (PathNavigateGround) getNavigator();
 		navigator.setCanSwim(true);
-		navigator.setAvoidsWater(true);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32);
 	}
 	
 	public void setBehaviour(NPCBehaviour behaviour) {
@@ -50,14 +50,14 @@ public class EntityNPC extends EntityCreature implements IFactionEntity {
 	 */
 	@Override
 	public boolean attackEntityAsMob(Entity entityIn) {
-		Item heldItem = getHeldItem().getItem();
+		Item heldItem = getHeldItem(EnumHand.MAIN_HAND).getItem();
 		
-		float baseDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+		float baseDamage = (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 		int knockback = 0;
 
 		if (entityIn instanceof EntityLivingBase)
 		{
-			baseDamage += EnchantmentHelper.func_152377_a(this.getHeldItem(), ((EntityLivingBase)entityIn).getCreatureAttribute());
+			baseDamage += EnchantmentHelper.getModifierForCreature(this.getHeldItem(EnumHand.MAIN_HAND), ((EntityLivingBase)entityIn).getCreatureAttribute());
 			knockback += EnchantmentHelper.getKnockbackModifier(this);
 		}
 

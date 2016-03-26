@@ -8,9 +8,10 @@ import io.github.richardyin.empirecraft.common.item.EmpireCraftItems;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -18,19 +19,26 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityEventHandler {
+	private static EntityEquipmentSlot[] ARMOR = {
+		EntityEquipmentSlot.HEAD,
+		EntityEquipmentSlot.CHEST,
+		EntityEquipmentSlot.LEGS,
+		EntityEquipmentSlot.FEET
+	};
+	
 	@SubscribeEvent
 	public void onMobSpawn(LivingSpawnEvent.CheckSpawn event) {
-		if (event.entityLiving instanceof EntityNPC) {
-			if (!event.world.canBlockSeeSky(new BlockPos(event.entity))) {
+		if (event.getEntityLiving() instanceof EntityNPC) {
+			if (!event.getWorld().canBlockSeeSky(new BlockPos(event.getEntity()))) {
 				event.setResult(Result.DENY);
 				return;
 			}
 			// bandit leader
-			EntityNPC npc = (EntityNPC) event.entityLiving;
+			EntityNPC npc = (EntityNPC) event.getEntityLiving();
 			npc.setFaction(Faction.BANDITS);
-			npc.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
-			for (int i = 1; i <= 4; i++) {
-				npc.setCurrentItemOrArmor(i, getBlackArmor(i));
+			npc.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.iron_sword));
+			for (EntityEquipmentSlot slot : ARMOR) {
+				npc.setItemStackToSlot(slot, getBlackArmor(slot));;
 			}
 			NPCBehaviour leaderBehaviour = new NPCBehaviourMelee(npc);
 			leaderBehaviour.getTasks().add(new EntityAIWander(npc, 0.7f));
@@ -38,12 +46,11 @@ public class EntityEventHandler {
 
 			// bandit followers
 			for (int i = 0; i < 3; i++) {
-				EntityNPC follower = new EntityNPC(event.world);
-				follower.setPosition(event.x, event.y, event.z);
-				follower.setCurrentItemOrArmor(1, getBlackArmor(1));
-				follower.setCurrentItemOrArmor(3, getBlackArmor(3));
-				follower.setCurrentItemOrArmor(0, new ItemStack(
-						EmpireCraftItems.IRON_DAGGER));
+				EntityNPC follower = new EntityNPC(event.getWorld());
+				follower.setPosition(event.getX(), event.getY(), event.getZ());
+				follower.setItemStackToSlot(EntityEquipmentSlot.FEET, getBlackArmor(EntityEquipmentSlot.FEET));
+				follower.setItemStackToSlot(EntityEquipmentSlot.CHEST, getBlackArmor(EntityEquipmentSlot.CHEST));
+				follower.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(EmpireCraftItems.IRON_DAGGER));
 				follower.setFaction(Faction.BANDITS);
 				follower.setLeader(npc);
 
@@ -55,33 +62,8 @@ public class EntityEventHandler {
 		}
 	}
 
-	@SubscribeEvent
-	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-		if (!event.world.isRemote && event.entity instanceof EntityNPC) {
-			NPCProperties.npcsByUuid.put(event.entity.getUniqueID(),
-					(EntityNPC) event.entity);
-		}
-	}
-	
-	@SubscribeEvent
-	public void onEntityConstructing(EntityConstructing event) {
-		if(event.entity instanceof EntityNPC) {
-			if(NPCProperties.get(event.entity) == null)
-				NPCProperties.register((EntityNPC) event.entity);
-			
-			//if event.entity is leader of an NPC that already exists
-			EntityNPC npcToFillLeader =
-					NPCProperties.leaderReferences.get(event.entity.getUniqueID());
-			if(npcToFillLeader != null) {
-				NPCProperties prop = (NPCProperties)
-						event.entity.getExtendedProperties(NPCProperties.NAME);
-				prop.setLeader((EntityNPC) event.entity);
-			}
-		}
-	}
-
-	private ItemStack getBlackArmor(int slot) {
-		ItemArmor item = (ItemArmor) EntityLiving.getArmorItemForSlot(slot, 0);
+	private ItemStack getBlackArmor(EntityEquipmentSlot slot) {
+		ItemArmor item = (ItemArmor) EntityLiving.func_184636_a(slot, 0);
 		ItemStack stack = new ItemStack(item);
 		item.setColor(stack, 0x000000);
 		return stack;

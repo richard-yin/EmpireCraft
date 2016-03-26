@@ -1,17 +1,14 @@
 package io.github.richardyin.empirecraft.common.entity.ai.tasks;
 
-import java.lang.reflect.Field;
-
 import io.github.richardyin.empirecraft.common.item.weapon.ItemWeapon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -176,11 +173,7 @@ public class EntityNPCMeleeAttack extends EntityAIBase {
         if (distance <= getMinDistanceSq(target) && this.attackTick <= 0)
         {
             this.attackTick = 10;
-
-            if (this.attacker.getHeldItem() != null)
-            {
-                this.attacker.swingItem();
-            }
+               this.attacker.swingArm(EnumHand.MAIN_HAND);
 
             this.attacker.attackEntityAsMob(target);
         }
@@ -189,11 +182,11 @@ public class EntityNPCMeleeAttack extends EntityAIBase {
     protected double getMinDistanceSq(EntityLivingBase attackTarget)
     {
     	double distance = attacker.width + attackTarget.width;
-    	if(attacker.getHeldItem() != null) {
-    		Item heldItem = attacker.getHeldItem().getItem();
+    	if(attacker.getHeldItem(EnumHand.MAIN_HAND) != null) {
+    		Item heldItem = attacker.getHeldItem(EnumHand.MAIN_HAND).getItem();
     		if(heldItem instanceof ItemWeapon) 
     			distance += ((ItemWeapon) heldItem).getReach();
-    		else if(heldItem.isItemTool(attacker.getHeldItem()))
+    		else if(heldItem.isItemTool(attacker.getHeldItem(EnumHand.MAIN_HAND)))
     			distance += 1;
     	}
         return Math.pow(distance, 2);

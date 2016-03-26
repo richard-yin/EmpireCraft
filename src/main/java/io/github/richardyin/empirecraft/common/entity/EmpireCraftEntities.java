@@ -44,7 +44,7 @@ public class EmpireCraftEntities {
 	
 	public static void addSpawns() {
 		List<BiomeGenBase> spawnableBiomes = new ArrayList<>();
-		for(BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
+		for(BiomeGenBase biome : BiomeGenBase.biomeRegistry) {
 			if(canBanditsSpawn(biome)) spawnableBiomes.add(biome);
 		}
 		EntityRegistry.addSpawn(EntityNPC.class, 1, 1, 1, EnumCreatureType.MONSTER,

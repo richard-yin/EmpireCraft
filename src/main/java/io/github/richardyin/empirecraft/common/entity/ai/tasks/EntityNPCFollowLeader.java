@@ -5,13 +5,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 /**
@@ -86,7 +85,6 @@ public class EntityNPCFollowLeader extends EntityAIBase
     public void startExecuting()
     {
         updateTick = 0;
-        ((PathNavigateGround)npc.getNavigator()).setAvoidsWater(true);
     }
 
     /**
@@ -96,14 +94,13 @@ public class EntityNPCFollowLeader extends EntityAIBase
     {
         leader = null;
         pathfinder.clearPathEntity();
-        ((PathNavigateGround)npc.getNavigator()).setAvoidsWater(true);
     }
 
     private boolean func_181065_a(BlockPos p_181065_1_)
     {
         IBlockState iblockstate = world.getBlockState(p_181065_1_);
         Block block = iblockstate.getBlock();
-        return block == Blocks.air ? true : !block.isFullCube();
+        return block == Blocks.air ? true : !block.isFullCube(iblockstate);
     }
 
     /**
@@ -131,12 +128,12 @@ public class EntityNPCFollowLeader extends EntityAIBase
     					{
     						for (int i1 = 0; i1 <= 4; ++i1)
     						{
-    							if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && World.doesBlockHaveSolidTopSurface(world, new BlockPos(i + l, k - 1, j + i1)) && func_181065_a(new BlockPos(i + l, k, j + i1)) && func_181065_a(new BlockPos(i + l, k + 1, j + i1)))
-    							{
-    								npc.setLocationAndAngles((double)((float)(i + l) + 0.5F), (double)k, (double)((float)(j + i1) + 0.5F), npc.rotationYaw, npc.rotationPitch);
-    								pathfinder.clearPathEntity();
-    								return;
-    							}
+//    							if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && World.doesBlockHaveSolidTopSurface(world, new BlockPos(i + l, k - 1, j + i1)) && func_181065_a(new BlockPos(i + l, k, j + i1)) && func_181065_a(new BlockPos(i + l, k + 1, j + i1)))
+//    							{
+//    								npc.setLocationAndAngles((double)((float)(i + l) + 0.5F), (double)k, (double)((float)(j + i1) + 0.5F), npc.rotationYaw, npc.rotationPitch);
+//    								pathfinder.clearPathEntity();
+//    								return;
+//    							}
     						}
     					}
     				}
