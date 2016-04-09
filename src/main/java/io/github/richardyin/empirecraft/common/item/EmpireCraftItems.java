@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -43,7 +42,7 @@ public class EmpireCraftItems {
 	
 	public static void initializeItems() {
 		itemTab = new ItemTab(CreativeTabs.getNextID(), "EmpireCraftTab");
-		IRON_PIKE = addItem(new ItemSpear(1, 5, ToolMaterial.IRON), "ironPike");
+		IRON_PIKE = addItem(new ItemSpear(1, 0, 5, ToolMaterial.IRON), "ironPike");
 		IRON_SPEAR = addItem(new ItemSpear(ToolMaterial.IRON), "ironSpear");
 		IRON_JAVELIN = addItem(new ItemJavelin(ToolMaterial.IRON), "ironJavelin");
 		IRON_DAGGER = addItem(new ItemDagger(ToolMaterial.IRON), "ironDagger");

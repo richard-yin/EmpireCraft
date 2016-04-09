@@ -7,7 +7,7 @@ import net.minecraft.item.Item.ToolMaterial;
 public class ItemDagger extends ItemWeapon {
 	
 	public ItemDagger(ToolMaterial material) {
-		super(-1, 0, material);
+		super(-1, -1, 0, material);
 		setMaxDamage(material.getMaxUses() / 2);
 	}
 
